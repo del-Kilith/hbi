@@ -1,0 +1,72 @@
+:root {
+  --t00: black;
+  --t05: black;
+  --t10: black;
+  --txt: black;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 600;
+}
+
+body {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--t05);
+  background: linear-gradient(
+    to bottom left,
+    var(--t00)   0%,
+    var(--t05)  50%,
+    var(--t10) 100%
+  );
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+main.typing > :last-child:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  animation: blink 1s infinite steps(2);
+}
+
+p {
+  color: var(--txt);
+  margin: 0.5rem;
+  padding: 0 0.1rem;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+  position: relative;
+  min-height: 1rem;
+  font-weight: 400;
+}
