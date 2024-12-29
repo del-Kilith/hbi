@@ -2,7 +2,7 @@ const timer = document.createElement('p')
 timer.style.position = 'absolute'
 timer.style.top = '1rem'
 timer.style.left = '1rem'
-document.body.appendChild(timer)
+isDebugMode && document.body.appendChild(timer)
 
 /**
  * Not a reliable way to get the time,

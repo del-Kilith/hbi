@@ -53,6 +53,72 @@ const State = {
     rippleMaxOpacity: 70,
     text: 'black',
     name: 'Day'
+  },
+  Loop0: {
+    gradient: [
+      '#995ac6',
+      '#dd7070',
+      '#e79c4d'
+    ],
+    rippleColor: '#FFD7AF',
+    rippleMaxOpacity: 70,
+    text: 'black',
+    name: 'Loop0'
+  },
+  Loop1: {
+    gradient: [
+      '#5b5ac6',
+      '#dd70d6',
+      '#a14de7'
+    ],
+    rippleColor: '#FFD7AF',
+    rippleMaxOpacity: 70,
+    text: 'black',
+    name: 'Loop1'
+  },
+  Loop2: {
+    gradient: [
+      '#309fd6',
+      '#aa62f1',
+      '#f180f5'
+    ],
+    rippleColor: '#FFD7AF',
+    rippleMaxOpacity: 70,
+    text: 'black',
+    name: 'Loop2'
+  },
+  Loop3: {
+    gradient: [
+      '#99e626',
+      '#62e0f1',
+      '#936bf3'
+    ],
+    rippleColor: '#FFD7AF',
+    rippleMaxOpacity: 70,
+    text: 'black',
+    name: 'Loop3'
+  },
+  Loop4: {
+    gradient: [
+      '#faea7e',
+      '#bcfa8d',
+      '#6bf3f3'
+    ],
+    rippleColor: '#FFD7AF',
+    rippleMaxOpacity: 70,
+    text: 'black',
+    name: 'Loop4'
+  },
+  Loop5: {
+    gradient: [
+      '#fa857e',
+      '#faca8d',
+      '#dff36b'
+    ],
+    rippleColor: '#FFD7AF',
+    rippleMaxOpacity: 70,
+    text: 'black',
+    name: 'Loop5'
   }
 }
 

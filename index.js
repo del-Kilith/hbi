@@ -87,10 +87,12 @@ async function stopTyping(container, { before, after }) {
 }
 
 (async function() {
-  const wakeStatus = document.body.appendChild(document.createElement('p'))
+  const wakeStatus = document.createElement('p')
   wakeStatus.style.position = 'absolute'
   wakeStatus.style.bottom = '1rem'
   wakeStatus.style.left = '1rem'
+  isDebugMode && document.body.appendChild(wakeStatus)
+
   try {
     const wakeLock = await navigator.wakeLock.request('screen')
     wakeStatus.innerText = `Lock acquired: ${wakeLock.type}`
@@ -98,7 +100,7 @@ async function stopTyping(container, { before, after }) {
     wakeStatus.innerText = `Lock failed: ${err.name} [${err.message}]`
     console.log(`${err.name}, ${err.message}`);
   }
-
+  initialize(State.Day)
 
   const main = document.querySelector('main')
   initialize(State.Dusk)
@@ -136,4 +138,17 @@ async function stopTyping(container, { before, after }) {
 
   await stopTyping(main, Delays.pause.long.min)
   await fadeText(main, Delays.pause.long.min)
+
+  const loop = [
+    async () => await transition(State.Loop0, State.Loop1, 8000),
+    async () => await transition(State.Loop1, State.Loop2, 8000),
+    async () => await transition(State.Loop2, State.Loop3, 8000),
+    async () => await transition(State.Loop3, State.Loop4, 8000),
+    async () => await transition(State.Loop4, State.Loop5, 8000),
+    async () => await transition(State.Loop5, State.Loop0, 8000),
+  ]
+  let i = 0
+  while (true) {
+    await loop[i++ % loop.length]()
+  }
 })();

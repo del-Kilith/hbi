@@ -78,7 +78,7 @@ const renderRipple = () => ripples.forEach(r => {
 
   const maxOpacity = root.style.getPropertyValue('--rippleMaxOpacity')
   const color = root.style.getPropertyValue('--rippleColor')
-  const o = Math.floor(maxOpacity * Math.sin(Math.PI * t))
+  const o = Math.round(maxOpacity * Math.sin(Math.PI * t))
   const h = o.toString(16).padStart(2, '0')
 
   ctx.fillStyle = `${color}${h}`
