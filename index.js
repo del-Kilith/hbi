@@ -56,7 +56,7 @@ const Section_Light = [
 ]
 
 const lines = [
-  'Hey Irma@',
+  /*'Hey Irma@',
   '$',
   ...Section_Dusk,
   '*',
@@ -68,7 +68,23 @@ const lines = [
   '*',
   '$',
   'Happy birthday Irma,-',
-  'Alessandro',
+  'Alessandro',*/
+  'Hello@',
+  '$',
+  'How are you?',
+  '$',
+  '*',
+  'Colors are pretty huh?',
+  '$',
+  '*',
+  'I know I know',
+  '$',
+  '*',
+  'Enjoy them!',
+  '$',
+  '*',
+  'Have a nice day!',
+  '$',
 ];
 
 async function prepareTyping(container, { before, after }) {
@@ -138,6 +154,7 @@ async function stopTyping(container, { before, after }) {
 
   await stopTyping(main, Delays.pause.long.min)
   await fadeText(main, Delays.pause.long.min)
+  await transition(State.Day, State.Loop0, 10000)
 
   const loop = [
     async () => await transition(State.Loop0, State.Loop1, 8000),

@@ -30,14 +30,22 @@ let snow = new Array(180).fill(0).map(snowflake)
 const ripple = () => ({
   cx: Math.random() * screen.x,
   cy: Math.random() * screen.y,
-  extRadius: 50,//Math.max(screen.x, screen.y),
+  extRadius: Math.random() * 30 + 20,//Math.max(screen.x, screen.y),
   spawnTime: Date.now(),
   ttl: Math.random() * 0.8 * 1000 + 4.2 * 1000,
   color: root.style.getPropertyValue('--rippleColor'),
   maxOpacity: root.style.getPropertyValue('--rippleMaxOpacity'),
+  direction: Math.random() < 0.5 ? -1 : 1,
 })
 const ripples = []
 
+const shine = () => ({
+  spawnTime: Date.now(),
+  maxExpansion: screen.x
+})
+const shines = []
+
+const rippleSpeed = 200
 const snowTimeFactor = 1.5
 const timeIncreasePerFrame = 0.001
 let time = 0
@@ -80,6 +88,7 @@ const renderRipple = () => ripples.forEach(r => {
   const color = root.style.getPropertyValue('--rippleColor')
   const o = Math.round(maxOpacity * Math.sin(Math.PI * t))
   const h = o.toString(16).padStart(2, '0')
+  r.cx += rippleSpeed * r.direction * timeIncreasePerFrame
 
   ctx.fillStyle = `${color}${h}`
   ctx.beginPath()
@@ -87,9 +96,30 @@ const renderRipple = () => ripples.forEach(r => {
   ctx.fill()
 })
 
+const renderShine = () => shines.forEach(shine => {
+  const t = (Date.now() - shine.spawnTime) / 4
+  const p = t / (screen.x * 2)
+  const e = Math.round(shine.maxExpansion * Math.sin(Math.PI * p))
+  const o = Math.round(17 * Math.sin(Math.PI * p * 2))
+
+  if (e < 0) {
+    shines.splice(shines.indexOf(shine), 1)
+    return
+  }
+
+
+  ctx.lineWidth = e
+  ctx.strokeStyle = `#ffffff${o.toString(16).padStart(2, '0')}`
+  ctx.beginPath()
+  ctx.moveTo(t, -200)
+  ctx.lineTo(t - screen.x, screen.y * 2)
+  ctx.stroke()
+})
+
 const loop = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   time += timeIncreasePerFrame
+  renderShine()
   renderRipple()
   processSnow()
   renderSnow()
@@ -99,9 +129,16 @@ requestAnimationFrame(loop)
 
 const spawnRipple = () => {
   ripples.push(ripple())
-  console.log('Ripple', ripples)
-  setTimeout(spawnRipple, Math.floor(Math.random() * 1000))
+  //console.log('Ripple', ripples)
+  setTimeout(spawnRipple, Math.floor(Math.random() * 1.5 * 1000))
 }
 
 setTimeout(spawnRipple, 1000)
+
+const spawnShine = () => {
+  shines.push(shine())
+  console.log('Shine', shines)
+  setTimeout(spawnShine, Math.floor(Math.random() * 15 * 1000 + 15 * 1000))
+}
+setTimeout(spawnShine, 1000)
 
